@@ -4,55 +4,58 @@
 <head>
 <style>
 body {
-	background-color: #000000;
+        background-color: #000000;
 }
 td {
-	text-align: center;
-	vertical-align: middle;
+        text-align: center;
+        vertical-align: middle;
 }
 p {
-	color: #7CFC00;
-	font-size: 32px;
+        color: #7CFC00;
+        font-size: 32px;
 }
 <title>PfSense Gateways</title>
 </style>
 </head>
 
 <body>
-	<center><h1 style="color:#7CFC00;"><u>PfSense Gateway Monitor</u></h1></center>
+        <center><h1 style="color:#7CFC00;"><u>PfSense Gateway Monitor</u></h1></center>
 <br>
 <center>
 <table style="width:360px">
-	<tr>
-		<td style="width:300px"><p>75Mb Primary WAN</p></td>
-		<td style="width:60px"><iframe src="./cgi-bin/wangw.cgi" width="60" height="60"></iframe></td>
-	</tr>
-	<tr>
-		<td><p>20Mb Alternate WAN</p></td>
-		<td><iframe src="./cgi-bin/wanalt_dhcp.cgi" width="60" height="60"></iframe></td>
-	</tr>
-	<tr>
-		<td><p>20Mb Tertiary WAN</p></td>
-		<td><iframe src="./cgi-bin/wantertiary_dhcp.cgi" width="60" height="60"></iframe></td>
-	</tr>
-	<tr>
-		<td><p>MGMT VPN</p></td>
-		<td><iframe src="./cgi-bin/mgmt.cgi" width="60" height="60"></iframe></td>
-	</tr>
-	<tr>
-		<td><p>Netherlands VPN</p></td>
-		<td><iframe src="./cgi-bin/netherlands.cgi" width="60" height="60"></iframe></td>
-	</tr>
-	<tr>
-		<td><p>London VPN</p></td>
-		<td><iframe src="./cgi-bin/london.cgi" width="60" height="60"></iframe></td>
-	</tr>
+        <tr>
+                <td style="width:300px"><p>75Mb Primary WAN</p></td>
+                <td style="width:60px"><iframe src="./cgi-bin/wangw.cgi" width="60" height="60"></iframe></td>
+        </tr>
+        <tr>
+                <td><p>20Mb Alternate WAN</p></td>
+                <td><iframe src="./cgi-bin/wanalt_dhcp.cgi" width="60" height="60"></iframe></td>
+        </tr>
+        <tr>
+                <td><p>20Mb Tertiary WAN</p></td>
+                <td><iframe src="./cgi-bin/wantertiary_dhcp.cgi" width="60" height="60"></iframe></td>
+        </tr>
+        <tr>
+                <td><p>MGMT VPN</p></td>
+                <td><iframe src="./cgi-bin/mgmt.cgi" width="60" height="60"></iframe></td>
+        </tr>
+        <tr>
+                <td><p>Netherlands VPN</p></td>
+                <td><iframe src="./cgi-bin/netherlands.cgi" width="60" height="60"></iframe></td>
+        </tr>
+        <tr>
+                <td><p>London VPN</p></td>
+                <td><iframe src="./cgi-bin/london.cgi" width="60" height="60"></iframe></td>
+        </tr>
 </table>
 </center>
 <br><br>
 <center style="color:#7CFC00;">If red, fix it on the PfSense, then reset the Monitor</center>
 <center style="color:#7CFC00;"><i>London VPN has Monitoring turned off and will never go red</i></center>
 <center><h3><a href="./cgi-bin/reset.cgi" style="color:#7CFC00;">Reset Monitor</a></h3></center>
+<center><h3><a href="./cgi-bin/logs.cgi" style="color:#00FF00;">Check Logs</a></h3></center>
 <center><iframe src="./cgi-bin/check.cgi" width="1" height="1"></iframe></center>
 </body>
 
+
+	
