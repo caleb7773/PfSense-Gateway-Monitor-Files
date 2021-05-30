@@ -17,5 +17,4 @@ echo "$(if [[ ${wangw} == *NETHER* ]] && [[ ! -e /home/www-data/vpnnet.txt ]]; t
 echo "$(if [[ ${wangw} == *LONDON* ]] && [[ ! -e /home/www-data/vpnlon.txt ]]; then echo "triggered" > /home/www-data/vpnlon.txt; sudo sed -i 's/: #.*/: #FF0000;"/g' /usr/lib/cgi-bin/london.cgi && echo "$(date "+%Y-%m-%e %T") --- London VPN went down<br>" >> /home/www-data/temp.log; cat /home/www-data/pfsense_gw.log >> /home/www-data/temp.log; mv /home/www-data/temp.log /home/www-data/pfsense_gw.log; fi)"
 echo "<br>"
 echo "<br>"
-echo "</body></html>"
-                      
+echo "</body></html>"                     
