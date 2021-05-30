@@ -14,6 +14,11 @@ sudo sed -i 's/: #.*/: #7CFC00;"/g' /usr/lib/cgi-bin/mgmt.cgi
 sudo sed -i 's/: #.*/: #7CFC00;"/g' /usr/lib/cgi-bin/netherlands.cgi
 sudo sed -i 's/: #.*/: #7CFC00;"/g' /usr/lib/cgi-bin/london.cgi
 sudo rm -rf /var/log/pfsense_gateway_alarm.log
+sudo rm -rf /home/www-data/vpn*
+sudo rm -rf /home/www-data/wan*
+echo "$(date "+%Y-%m-%e %T") --- Gateway Monitor Reset<br>" >> /home/www-data/temp.log
+cat /home/www-data/pfsense_gw.log >> /home/www-data/temp.log
+mv /home/www-data/temp.log /home/www-data/pfsense_gw.log
 sudo touch /var/log/pfsense_gateway_alarm.log
 sudo chmod 640 /var/log/pfsense_gateway_alarm.log
 sudo chown syslog:adm /var/log/pfsense_gateway_alarm.log
