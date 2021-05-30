@@ -1,7 +1,8 @@
 sudo apt install net-tools apache2-bin rsyslog -y
 sudo apt install apache2 -y
 
-
+sudo mkdir /home/www-data
+sudo chown -R /home/www-data
 
 # Enable CGI Scripts on Apache
 sudo chown -R www-data:www-data /var/www
