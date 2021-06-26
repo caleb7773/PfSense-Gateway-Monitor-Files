@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jquery-3.6.0.js"></script>
+    <title>pfSense Gateway | Logs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgb(173, 173, 173);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .App {
+            align-items: center;
+            background-color: #89aa9a;
+            display: flex;
+            flex-direction: column;
+            font-family: sans-serif;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .log-card {
+            align-items: center;
+            background-color: rgb(66, 66, 66);
+            display: flex;
+            justify-content: flex-start;
+            padding: 20px 10px;
+            width: 100%;
+        }
+
+        .log-card p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        #log-list {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            width: max-content;
+        }
+
+        .nav-bar {
+            align-items: center;
+            background-color: rgb(66, 66, 66);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="App">
+    <div class="nav-bar">
+        <a href="/index.html">
+            <h3>PfSense Gateway Monitor</h3>
+        </a>
+
+        <!-- <a href="./resetlog.cgi">
+            <h3>Clear The Logs</h3>
+        </a> -->
+    </div>
+
+    <ul id="log-list"></ul>
+
+    <script>
+        const logCard = document.getElementsByClassName('log-card');
+
+        $(document).ready(() => {
+            $.get('/home/www-data/pfsense_gw.log', (data) => {
+                console.log(data);
+                let lines = data.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    $('#log-list').append(`<li class='log-card'><p>${lines[i]}</p></li>`);
+                    for (let x = 0; x < logCard.length; x++) {
+                        if (x % 2 != 0) {
+                            logCard[x].style.backgroundColor = 'rgb(90, 90, 90)';
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

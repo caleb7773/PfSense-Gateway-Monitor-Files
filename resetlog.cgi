@@ -17,3 +17,4 @@ echo "$(sudo mv /home/www-data/temp_archive.log /home/www-data/pfsense_gw_archiv
 echo "$(echo "$(date "+%Y-%m-%e %T") --- Log has been reset<br>" > /home/www-data/pfsense_gw.log)"
 echo "<br>"
 echo "</body></html>"
+

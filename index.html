@@ -1,61 +1,200 @@
-<Content-type: text/html>
-<html>
-<meta http-equiv="refresh" content="4\;url=index.html" />
+<html lang="en">
+
 <head>
-<style>
-body {
-        background-color: #000000;
-}
-td {
-        text-align: center;
-        vertical-align: middle;
-}
-p {
-        color: #00FF00;
-        font-size: 32px;
-}
-<title>PfSense Gateways</title>
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="4\;url=index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PfSense Monitor</title>
 </head>
 
-<body>
-        <center><h1 style="color:#00FF00;"><u>PfSense Gateway Monitor</u></h1></center>
-<br>
-<center>
-<table style="width:360px">
-        <tr>
-                <td style="width:300px"><p>75Mb Primary WAN</p></td>
-                <td style="width:60px"><iframe src="./cgi-bin/wangw.cgi" width="60" height="60"></iframe></td>
-        </tr>
-        <tr>
-                <td><p>20Mb Alternate WAN</p></td>
-                <td><iframe src="./cgi-bin/wanalt_dhcp.cgi" width="60" height="60"></iframe></td>
-        </tr>
-        <tr>
-                <td><p>20Mb Tertiary WAN</p></td>
-                <td><iframe src="./cgi-bin/wantertiary_dhcp.cgi" width="60" height="60"></iframe></td>
-        </tr>
-        <tr>
-                <td><p>MGMT VPN</p></td>
-                <td><iframe src="./cgi-bin/mgmt.cgi" width="60" height="60"></iframe></td>
-        </tr>
-        <tr>
-                <td><p>Netherlands VPN</p></td>
-                <td><iframe src="./cgi-bin/netherlands.cgi" width="60" height="60"></iframe></td>
-        </tr>
-        <tr>
-                <td><p>London VPN</p></td>
-                <td><iframe src="./cgi-bin/london.cgi" width="60" height="60"></iframe></td>
-        </tr>
-</table>
-</center>
-<br><br>
-<center style="color:#00FF00;">If red, fix it on the PfSense, then reset the Monitor</center>
-<center style="color:#00FF00;"><i>London VPN has Monitoring turned off and will never go red</i></center>
-<center><h3><a href="./cgi-bin/reset.cgi" style="color:#00FF00;">Reset Monitor</a></h3></center>
-<center><h3><a href="./cgi-bin/logs.cgi" style="color:#00FF00;">Check Logs</a></h3></center>
-<center><iframe src="./cgi-bin/check.cgi" width="0" height="0" frameBorder="0"></iframe></center>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: rgb(173, 173, 173);
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    iframe {
+        border: none;
+        border-radius: 50%;
+        height: 65px;
+        width: 65px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .App {
+        align-items: center;
+        background-image: linear-gradient(315deg, #5d4257 0%, #89aa9a 74%);
+        display: flex;
+        flex-direction: column;
+        font-family: sans-serif;
+        min-height: 100vh;
+        text-align: center;
+    }
+
+    #check-logs {
+        background-color: rgb(66, 66, 66);
+        margin-bottom: 10px;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    #check-logs:hover {
+        background-color: white;
+        color: black;
+    }
+
+    .footer {
+        color: white;
+        font-weight: 300;
+        letter-spacing: 0.2px;
+        line-height: 1.5rem;
+        margin-top: 20px;
+    }
+
+    .footer a {
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .link-card {
+        align-items: center;
+        background-color: rgb(66, 66, 66);
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 10px;
+        width: 100%;
+    }
+
+    .link-card p {
+        font-size: 1.5rem;
+        margin-right: 20px;
+    }
+
+    .nav-bar {
+        align-items: center;
+        background-color: rgb(66, 66, 66);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .nav-links {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .network-main {
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        color: white;
+        display: grid;
+        grid-template-columns: auto;
+        justify-items: center;
+    }
+
+    .main-container {
+        margin: 0 10px;
+    }
+
+    #reset-monitor {
+        background-color: rgb(66, 66, 66);
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    #reset-monitor:hover {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+<body class="App">
+    <!-- Nav Bar -->
+    <div class="nav-bar">
+        <a href="/index.html">
+            <h3>PfSense Gateway Monitor</h3>
+        </a>
+    </div>
+
+    <!-- Status container -->
+    <div class="main-container">
+        <ul class="network-main">
+            <li class="link-card">
+                <p>75Mb Primary WAN</p>
+                <iframe src="./cgi-bin/wangw.cgi"></iframe>
+            </li>
+
+            <li class="link-card">
+                <p>20Mb Alternate WAN</p>
+                <iframe src="./cgi-bin/wanalt_dhcp.cgi"></iframe>
+            </li>
+
+            <li class="link-card">
+                <p>20Mb Tertiary WAN</p>
+                <iframe src="./cgi-bin/wantertiary_dhcp.cgi"></iframe>
+            </li>
+
+            <li class="link-card">
+                <p>MGMT VPN</p>
+                <iframe src="./cgi-bin/mgmt.cgi"></iframe>
+            </li>
+
+            <li class="link-card">
+                <p>Netherlands VPN</p>
+                <iframe src="./cgi-bin/netherlands.cgi"></iframe>
+            </li>
+
+            <li class="link-card">
+                <p>London VPN</p>
+                <iframe src="./cgi-bin/london.cgi"></iframe>
+            </li>
+        </ul>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>If red, fix it on the PfSense, then reset the monitor.</p>
+            <p style="font-style: italic">London VPN has monitoring turned off and will never go red.</p>
+            <div class="nav-links">
+                <a id="reset-monitor" href="./cgi-bin/reset.cgi">Reset Monitor</a>
+                <a id="check-logs" href="./cgi-bin/logs.cgi">Check Logs</a>
+                <iframe style="display: none" src="./cgi-bin/check.cgi" width="0" height="0" frameBorder="0"></iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        const linkCard = document.getElementsByClassName("link-card");
+        for (let i = 0; i < linkCard.length; i++) {
+            if (i % 2 != 0) {
+                linkCard[i].style.backgroundColor = "rgb(90, 90, 90)";
+            }
+        }
+    </script>
 </body>
 
+</html>
 
-	
